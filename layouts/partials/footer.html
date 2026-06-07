@@ -1,0 +1,16 @@
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-meta">
+      <span>&copy; {{ now.Year }} {{ site.Params.author }}</span>
+      <span class="dot">&middot;</span>
+      <span>Built with <a href="https://gohugo.io" rel="noopener">Hugo</a></span>
+    </div>
+    <div class="footer-links">
+      {{- with .OutputFormats.Get "rss" }}<a href="{{ .RelPermalink }}">RSS</a>{{ end }}
+      {{- with site.Params.github }}<a href="https://github.com/{{ . }}" rel="me noopener">GitHub</a>{{ end }}
+      {{- with site.Params.twitter }}<a href="https://twitter.com/{{ . }}" rel="me noopener">Twitter</a>{{ end }}
+      {{- with site.Params.linkedin }}<a href="https://www.linkedin.com/in/{{ . }}" rel="me noopener">LinkedIn</a>{{ end }}
+      {{- with site.Params.email }}<a href="mailto:{{ . }}">Email</a>{{ end }}
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,30 @@
+{{ define "main" }}
+  <section class="hero">
+    <h1 class="hero-title">{{ site.Title }}</h1>
+    <p class="hero-lede">{{ site.Params.description }}</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="{{ "/posts/" | relURL }}">Read the posts</a>
+      <a class="btn btn-ghost" href="{{ "/about/" | relURL }}">About</a>
+    </div>
+  </section>
+
+  {{- $posts := where site.RegularPages "Type" "posts" }}
+  {{- $latest := first 6 $posts }}
+  {{- if $latest }}
+    <section class="section">
+      <div class="section-head">
+        <h2>Latest posts</h2>
+        <a class="see-all" href="{{ "/posts/" | relURL }}">All posts &rarr;</a>
+      </div>
+      <div class="post-grid">
+        {{- range $latest }}
+          {{ partial "post-card.html" . }}
+        {{- end }}
+      </div>
+    </section>
+  {{- else }}
+    <section class="section">
+      <p class="empty">No posts yet. Add Markdown files under <code>content/posts/</code> to get started.</p>
+    </section>
+  {{- end }}
+{{ end }}

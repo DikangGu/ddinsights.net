@@ -1,4 +1,61 @@
-baseURL = 'https://example.org/'
-languageCode = 'en-us'
-title = 'My New Hugo Site'
-theme = "kiera"
+baseURL = "https://ddinsights.net/"
+languageCode = "en-us"
+title = "Distributed Data Insights"
+enableRobotsTXT = true
+enableEmoji = true
+
+# Pagination (Hugo >= 0.128)
+[pagination]
+  pagerSize = 8
+
+[params]
+  description = "Insights, patterns, and hard-won lessons on distributed data systems — storage, streaming, consistency, and scale."
+  author = "Distributed Data Insights"
+  subtitle = "Notes on distributed data systems"
+  dateFormat = "Jan 2, 2006"
+  # Set to a real address to show a contact link in the footer
+  email = ""
+  # Optional social links (leave blank to hide)
+  github = ""
+  twitter = ""
+  linkedin = ""
+
+[menu]
+  [[menu.main]]
+    name = "Posts"
+    pageRef = "/posts"
+    weight = 10
+  [[menu.main]]
+    name = "Tags"
+    pageRef = "/tags"
+    weight = 20
+  [[menu.main]]
+    name = "About"
+    pageRef = "/about"
+    weight = 30
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+
+[markup]
+  [markup.highlight]
+    noClasses = false
+    lineNos = false
+    codeFences = true
+    guessSyntax = true
+    tabWidth = 2
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
+    ordered = false
+
+[services]
+  [services.rss]
+    limit = 20
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]

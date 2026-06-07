@@ -1,0 +1,8 @@
+{{ define "main" }}
+  <section class="notfound">
+    <p class="notfound-code">404</p>
+    <h1>This partition is unavailable</h1>
+    <p class="page-intro">The page you requested couldn't be found — maybe it was rebalanced to another shard.</p>
+    <a class="btn btn-primary" href="{{ "/" | relURL }}">Back home</a>
+  </section>
+{{ end }}

@@ -1,0 +1,22 @@
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="{{ "/" | relURL }}">
+      <span class="brand-mark" aria-hidden="true">&delta;</span>
+      <span class="brand-text">
+        <span class="brand-title">{{ site.Title }}</span>
+        <span class="brand-sub">{{ site.Params.subtitle }}</span>
+      </span>
+    </a>
+
+    <nav class="site-nav" aria-label="Primary">
+      {{- range site.Menus.main }}
+        {{- $active := or ($.IsMenuCurrent "main" .) ($.HasMenuCurrent "main" .) }}
+        <a href="{{ .URL }}" {{ if $active }}class="active" aria-current="page"{{ end }}>{{ .Name }}</a>
+      {{- end }}
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle color theme" title="Toggle theme">
+        <span class="theme-icon theme-icon-dark" aria-hidden="true">&#9789;</span>
+        <span class="theme-icon theme-icon-light" aria-hidden="true">&#9728;</span>
+      </button>
+    </nav>
+  </div>
+</header>

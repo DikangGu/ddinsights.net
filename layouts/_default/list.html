@@ -1,0 +1,21 @@
+{{ define "main" }}
+  <header class="page-head">
+    <h1>{{ .Title }}</h1>
+    {{- with .Content }}<div class="page-intro">{{ . }}</div>{{ end }}
+    {{- with .Description }}{{ if not $.Content }}<p class="page-intro">{{ . }}</p>{{ end }}{{ end }}
+  </header>
+
+  {{- $pages := .Pages }}
+  {{- if .IsHome }}{{ $pages = where site.RegularPages "Type" "posts" }}{{ end }}
+  {{- $paginator := .Paginate (where $pages "Type" "posts") }}
+  {{- if $paginator.Pages }}
+    <div class="post-list">
+      {{- range $paginator.Pages }}
+        {{ partial "post-card.html" . }}
+      {{- end }}
+    </div>
+    {{ partial "pagination.html" . }}
+  {{- else }}
+    <p class="empty">Nothing here yet.</p>
+  {{- end }}
+{{ end }}

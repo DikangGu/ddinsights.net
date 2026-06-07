@@ -1,0 +1,47 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="color-scheme" content="dark light" />
+
+{{- $title := .Title -}}
+{{- if .IsHome -}}
+  <title>{{ site.Title }} — {{ site.Params.subtitle }}</title>
+{{- else -}}
+  <title>{{ $title }} · {{ site.Title }}</title>
+{{- end }}
+
+{{- $desc := .Description | default site.Params.description -}}
+<meta name="description" content="{{ $desc }}" />
+<meta name="author" content="{{ site.Params.author }}" />
+
+<!-- Open Graph / Twitter -->
+<meta property="og:site_name" content="{{ site.Title }}" />
+<meta property="og:title" content="{{ if .IsHome }}{{ site.Title }}{{ else }}{{ $title }}{{ end }}" />
+<meta property="og:description" content="{{ $desc }}" />
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}" />
+<meta property="og:url" content="{{ .Permalink }}" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="canonical" href="{{ .Permalink }}" />
+
+{{- with .OutputFormats.Get "rss" }}
+  <link rel="alternate" type="application/rss+xml" href="{{ .Permalink }}" title="{{ site.Title }}" />
+{{- end }}
+
+<!-- Prevent theme flash: apply stored theme before paint -->
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem("theme");
+      if (!t) t = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", t);
+    } catch (e) {}
+  })();
+</script>
+
+{{- $css := resources.Get "css/main.css" }}
+{{- if hugo.IsProduction }}
+  {{- $css = $css | minify | fingerprint }}
+{{- end }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" {{ if hugo.IsProduction }}integrity="{{ $css.Data.Integrity }}"{{ end }} />
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%97%3C/text%3E%3C/svg%3E" />

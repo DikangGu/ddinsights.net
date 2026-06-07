@@ -1,0 +1,15 @@
+{{ define "main" }}
+  <header class="page-head">
+    <h1>{{ .Title }}</h1>
+    <p class="page-intro">Browse posts by topic.</p>
+  </header>
+
+  {{- $data := .Data }}
+  <div class="term-cloud">
+    {{- range $name, $taxonomy := .Data.Terms.ByCount }}
+      <a class="term-chip" href="{{ (printf "/%s/%s/" $data.Plural ($taxonomy.Name | urlize)) | relLangURL }}">
+        #{{ $taxonomy.Name }} <span class="term-count">{{ $taxonomy.Count }}</span>
+      </a>
+    {{- end }}
+  </div>
+{{ end }}

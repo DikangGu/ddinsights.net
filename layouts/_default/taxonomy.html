@@ -1,0 +1,14 @@
+{{ define "main" }}
+  <header class="page-head">
+    <h1>#{{ .Title }}</h1>
+    <p class="page-intro">{{ len .Pages }} post{{ if ne (len .Pages) 1 }}s{{ end }} tagged &ldquo;{{ .Title }}&rdquo;.</p>
+  </header>
+
+  {{- $paginator := .Paginate .Pages }}
+  <div class="post-list">
+    {{- range $paginator.Pages }}
+      {{ partial "post-card.html" . }}
+    {{- end }}
+  </div>
+  {{ partial "pagination.html" . }}
+{{ end }}

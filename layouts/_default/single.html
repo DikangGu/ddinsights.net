@@ -1,0 +1,48 @@
+{{ define "main" }}
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">{{ .Title }}</h1>
+      <div class="post-meta">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format site.Params.dateFormat }}</time>
+        {{- if gt .ReadingTime 0 }}<span class="dot">&middot;</span><span>{{ .ReadingTime }} min read</span>{{ end }}
+        {{- with .Params.author }}<span class="dot">&middot;</span><span>{{ . }}</span>{{ end }}
+      </div>
+      {{- with .Description }}<p class="post-lede">{{ . }}</p>{{ end }}
+    </header>
+
+    {{- if and (gt (len .TableOfContents) 100) (default true .Params.toc) }}
+      <details class="toc" open>
+        <summary>Contents</summary>
+        {{ .TableOfContents }}
+      </details>
+    {{- end }}
+
+    <div class="prose">
+      {{ .Content }}
+    </div>
+
+    {{- with .Params.tags }}
+      <div class="tag-row post-tags">
+        {{- range . }}
+          <a class="tag" href="{{ "/tags/" | relLangURL }}{{ . | urlize }}/">#{{ . }}</a>
+        {{- end }}
+      </div>
+    {{- end }}
+
+    {{- $others := where (where site.RegularPages "Type" "posts") "Permalink" "!=" .Permalink }}
+    {{- $related := $others }}
+    {{- with .Params.tags }}
+      {{- $tagged := where $others "Params.tags" "intersect" . }}
+      {{- if $tagged }}{{ $related = $tagged }}{{ end }}
+    {{- end }}
+    {{- $related = first 3 $related }}
+    {{- if $related }}
+      <section class="related">
+        <h2>Keep reading</h2>
+        <div class="post-grid">
+          {{- range $related }}{{ partial "post-card.html" . }}{{ end }}
+        </div>
+      </section>
+    {{- end }}
+  </article>
+{{ end }}

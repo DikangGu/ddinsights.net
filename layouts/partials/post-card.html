@@ -1,0 +1,18 @@
+{{- $p := . }}
+<article class="post-card">
+  <a class="post-card-link" href="{{ $p.RelPermalink }}">
+    <h3 class="post-card-title">{{ $p.Title }}</h3>
+  </a>
+  <div class="post-meta">
+    <time datetime="{{ $p.Date.Format "2006-01-02" }}">{{ $p.Date.Format site.Params.dateFormat }}</time>
+    {{- if gt $p.ReadingTime 0 }}<span class="dot">&middot;</span><span>{{ $p.ReadingTime }} min read</span>{{ end }}
+  </div>
+  <p class="post-card-summary">{{ $p.Summary | plainify | truncate 220 }}</p>
+  {{- with $p.Params.tags }}
+    <div class="tag-row">
+      {{- range . }}
+        <a class="tag" href="{{ "/tags/" | relLangURL }}{{ . | urlize }}/">#{{ . }}</a>
+      {{- end }}
+    </div>
+  {{- end }}
+</article>
