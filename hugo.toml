@@ -38,6 +38,19 @@ enableEmoji = true
   tag = "tags"
   category = "categories"
 
+# Comments via giscus (https://giscus.app). Comments render only once
+# repoId AND categoryId are filled in below — get them from giscus.app
+# after installing the giscus GitHub App and enabling Discussions.
+[params.giscus]
+  repo = "DikangGu/ddinsights.net"
+  repoId = ""            # <-- paste from giscus.app
+  category = "Comments"
+  categoryId = ""        # <-- paste from giscus.app
+  mapping = "pathname"
+  reactions = "1"
+  inputPosition = "bottom"
+  lang = "en"
+
 [markup]
   [markup.highlight]
     noClasses = false

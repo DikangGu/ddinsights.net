@@ -44,5 +44,9 @@
         </div>
       </section>
     {{- end }}
+
+    {{- if default true .Params.comments }}
+      {{ partial "comments.html" . }}
+    {{- end }}
   </article>
 {{ end }}

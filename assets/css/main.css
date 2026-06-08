@@ -669,6 +669,21 @@ h1, h2, h3, h4 {
   margin: 0 0 18px;
 }
 
+/* ---- Comments ---- */
+.comments {
+  margin-top: 56px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+}
+.comments h2 {
+  font-size: 1.3rem;
+  margin: 0 0 18px;
+}
+.comments .giscus,
+.comments .giscus-frame {
+  width: 100%;
+}
+
 /* ---- 404 ---- */
 .notfound {
   text-align: center;

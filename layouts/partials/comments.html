@@ -1,0 +1,32 @@
+{{- with site.Params.giscus }}
+  {{- if and .repo .repoId .categoryId }}
+    <section class="comments" aria-label="Comments">
+      <h2>Comments</h2>
+      <div id="giscus-container"></div>
+    </section>
+    <script>
+      (function () {
+        var theme =
+          document.documentElement.getAttribute("data-theme") === "light"
+            ? "light"
+            : "dark";
+        var s = document.createElement("script");
+        s.src = "https://giscus.app/client.js";
+        s.setAttribute("data-repo", {{ .repo | jsonify }});
+        s.setAttribute("data-repo-id", {{ .repoId | jsonify }});
+        s.setAttribute("data-category", {{ .category | default "Comments" | jsonify }});
+        s.setAttribute("data-category-id", {{ .categoryId | jsonify }});
+        s.setAttribute("data-mapping", {{ .mapping | default "pathname" | jsonify }});
+        s.setAttribute("data-strict", "0");
+        s.setAttribute("data-reactions-enabled", {{ .reactions | default "1" | jsonify }});
+        s.setAttribute("data-emit-metadata", "0");
+        s.setAttribute("data-input-position", {{ .inputPosition | default "bottom" | jsonify }});
+        s.setAttribute("data-theme", theme);
+        s.setAttribute("data-lang", {{ .lang | default "en" | jsonify }});
+        s.setAttribute("crossorigin", "anonymous");
+        s.async = true;
+        document.getElementById("giscus-container").appendChild(s);
+      })();
+    </script>
+  {{- end }}
+{{- end }}
