@@ -10,15 +10,15 @@ enableEmoji = true
 
 [params]
   description = "Insights, patterns, and hard-won lessons on distributed data systems — storage, streaming, consistency, and scale."
-  author = "Distributed Data Insights"
+  author = "Dikang Gu"
   subtitle = "Notes on distributed data systems"
   dateFormat = "Jan 2, 2006"
   # Set to a real address to show a contact link in the footer
   email = ""
   # Optional social links (leave blank to hide)
-  github = ""
+  github = "DikangGu"
   twitter = ""
-  linkedin = ""
+  linkedin = "dikanggu"
 
 [menu]
   [[menu.main]]
